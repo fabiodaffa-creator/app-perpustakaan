@@ -2,23 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index() 
+    private array $categories = [
+        ['id' => 1, 'nama_kategori' => 'Fiksi', 'deskripsi' => 'Buku cerita rekaan seperti novel dan kumpulan cerpen.'],
+        ['id' => 2, 'nama_kategori' => 'Teknologi', 'deskripsi' => 'Buku seputar teknologi, pemrograman, dan ilmu komputer.'],
+        ['id' => 3, 'nama_kategori' => 'Sejarah', 'deskripsi' => 'Buku bertema sejarah dan biografi tokoh.'],
+    ];
+    
+    public function index()
     {
-        return 'CategoryController@index';  // This method will handle the request to list all categories
+        $categories = $this->categories;
+
+        return view('categories.index', compact('categories'));
     }
 
     public function create()
     {
-        return 'CategoryController@create'; // This method will handle the request to show the form for creating a new category
+        return view('categories.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        return 'CategoryController@store'; // This method will handle the request to store a new category in the database
+        $validated = $request->validated();
+
+        return redirect()->route('categories.index')
+            ->with('success', "Kategori \"{$validated['nama_kategori']}\" berhasil ditambahkan (data dummy, belum tersimpan ke database).");
     }
 
     public function edit(string $id)
