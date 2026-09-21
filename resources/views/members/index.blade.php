@@ -1,47 +1,38 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Anggota</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2>Daftar Anggota</h2>
-        
-        <a href="{{ route('members.create') }}" class="btn btn-primary mb-3">Tambah Anggota</a>
+@extends('layouts.app')
 
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+@section('title', 'Daftar Anggota')
 
-        <table class="table table-bordered">
-            <thead>
+@section('content')
+    <h1>Daftar Anggota</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>NIM</th>
+                <th>Email</th>
+                <th>No. Telepon</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($members as $member)
                 <tr>
-                    <th>Nama</th>
-                    <th>NIM</th>
-                    <th>Email</th>
-                    <th>Telepon</th>
-                    <th>Alamat</th>
-                    <th>Status</th>
+                    <td>{{ $member['id'] }}</td>
+                    <td>{{ $member['nama'] }}</td>
+                    <td>{{ $member['nim'] }}</td>
+                    <td>{{ $member['email'] }}</td>
+                    <td>{{ $member['nomor_telepon'] }}</td>
+                    <td>{{ ucfirst($member['status']) }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($members as $member)
+            @empty
                 <tr>
-                    <td>{{ $member->nama }}</td>
-                    <td>{{ $member->nim }}</td>
-                    <td>{{ $member->email }}</td>
-                    <td>{{ $member->nomor_telepon }}</td>
-                    <td>{{ $member->alamat }}</td>
-                    <td>{{ $member->status }}</td>
+                    <td colspan="6">Belum ada data anggota.</td>
                 </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+            @endforelse
+        </tbody>
+    </table>
+
+    <p><em>Catatan: data di atas masih data dummy (array statis di Controller). Form tambah/edit anggota dan CRUD lengkap anggota baru dibuat mulai Pertemuan 5.</em></p>
+@endsection
