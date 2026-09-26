@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Tambah Anggota</title>
+    <title>Edit Anggota</title>
     <style>
         body { font-family: sans-serif; margin: 40px; max-width: 500px; }
         label { display: block; margin-top: 12px; font-weight: bold; }
@@ -12,39 +12,41 @@
     </style>
 </head>
 <body>
-    <h1>Tambah Anggota Baru</h1>
+    <h1>Edit Anggota</h1>
     <p><a href="{{ route('members.index') }}">&larr; Kembali</a></p>
 
-    <form action="{{ route('members.store') }}" method="POST">
+    <form action="{{ route('members.update', $member['id']) }}" method="POST">
         @csrf
+        @method('PUT')
+        
         <label>Nama</label>
-        <input type="text" name="nama" value="{{ old('nama') }}">
+        <input type="text" name="nama" value="{{ old('nama', $member['nama']) }}">
         @error('nama') <div class="error">{{ $message }}</div> @enderror
 
         <label>NIM</label>
-        <input type="text" name="nim" value="{{ old('nim') }}">
+        <input type="text" name="nim" value="{{ old('nim', $member['nim']) }}">
         @error('nim') <div class="error">{{ $message }}</div> @enderror
 
         <label>Email</label>
-        <input type="email" name="email" value="{{ old('email') }}">
+        <input type="email" name="email" value="{{ old('email', $member['email']) }}">
         @error('email') <div class="error">{{ $message }}</div> @enderror
 
         <label>Nomor Telepon</label>
-        <input type="text" name="nomor_telepon" value="{{ old('nomor_telepon') }}">
+        <input type="text" name="nomor_telepon" value="{{ old('nomor_telepon', $member['nomor_telepon']) }}">
         @error('nomor_telepon') <div class="error">{{ $message }}</div> @enderror
 
         <label>Alamat</label>
-        <textarea name="alamat" rows="3">{{ old('alamat') }}</textarea>
+        <textarea name="alamat" rows="3">{{ old('alamat', $member['alamat']) }}</textarea>
         @error('alamat') <div class="error">{{ $message }}</div> @enderror
 
         <label>Status</label>
         <select name="status">
-            <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-            <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+            <option value="aktif" {{ old('status', $member['status']) == 'aktif' ? 'selected' : '' }}>Aktif</option>
+            <option value="nonaktif" {{ old('status', $member['status']) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
         </select>
         @error('status') <div class="error">{{ $message }}</div> @enderror
 
-        <button type="submit" class="btn">Simpan</button>
+        <button type="submit" class="btn">Perbarui</button>
     </form>
 </body>
 </html>
