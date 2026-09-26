@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Detail Buku</title>
     <style>
-        body { font-family: sans-serif; margin: 40px; max-width: 500px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 16px; }
-        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
-        th { width: 160px; background: #f3f4f6; }
+        body { font-family: sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; max-width: 600px; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; width: 30%; }
     </style>
 </head>
 <body>
@@ -15,6 +15,10 @@
     <p><a href="{{ route('books.index') }}">&larr; Kembali ke daftar buku</a></p>
 
     <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ $book['id'] }}</td>
+        </tr>
         <tr>
             <th>Judul</th>
             <td>{{ $book['judul'] }}</td>
@@ -33,15 +37,15 @@
         </tr>
         <tr>
             <th>ISBN</th>
-            <td>{{ $book['isbn'] ?? '-' }}</td>
+            <td>{{ $book['isbn'] ?: '-' }}</td>
         </tr>
         <tr>
             <th>Stok</th>
             <td>{{ $book['stok'] }}</td>
         </tr>
         <tr>
-            <th>Kategori</th>
-            <td>{{ $book['kategori'] }}</td>
+            <th>ID Kategori</th>
+            <td>{{ $book['category_id'] }}</td>
         </tr>
     </table>
 </body>

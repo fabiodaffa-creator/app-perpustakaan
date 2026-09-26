@@ -13,7 +13,6 @@
                 <th>NIM</th>
                 <th>Email</th>
                 <th>No. Telepon</th>
-                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +23,6 @@
                     <td>{{ $member['nim'] }}</td>
                     <td>{{ $member['email'] }}</td>
                     <td>{{ $member['nomor_telepon'] }}</td>
-                    <td>{{ ucfirst($member['status']) }}</td>
                 </tr>
             @empty
                 <tr>
