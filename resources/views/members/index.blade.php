@@ -1,35 +1,15 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Daftar Anggota</title>
-    <style>
-        body { font-family: sans-serif; margin: 40px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn { padding: 6px 12px; background: #2563eb; color: #fff; text-decoration: none; border-radius: 4px; display: inline-block; }
-        .btn-info { background: #0ea5e9; }
-        .btn-edit { background: #eab308; }
-        .btn-danger { background: #dc2626; border: none; cursor: pointer; color: white; padding: 6px 12px; border-radius: 4px;}
-        .alert { padding: 10px; background-color: #dcfce3; color: #166534; border: 1px solid #bbf7d0; border-radius: 4px; margin-bottom: 20px; }
-        .search-box { margin-bottom: 20px; }
-        .search-box input { padding: 8px; width: 250px; }
-        .search-box button { padding: 8px 12px; }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Daftar Anggota')
+
+@section('content')
     <h1>Daftar Anggota</h1>
 
-    @if(session('success'))
-        <div class="alert">{{ session('success') }}</div>
-    @endif
-
-    <div class="search-box">
+    <div class="search-box" style="margin-bottom: 20px;">
         <form action="{{ route('members.index') }}" method="GET">
-            <input type="text" name="search" placeholder="Cari nama anggota..." value="{{ request('search') }}">
-            <button type="submit">Cari</button>
-            <a href="{{ route('members.index') }}" style="margin-left: 10px; text-decoration: none;">Reset</a>
+            <input type="text" name="search" placeholder="Cari nama anggota..." value="{{ request('search') }}" style="padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+            <button type="submit" style="padding: 8px 12px; background: #e5e7eb; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">Cari</button>
+            <a href="{{ route('members.index') }}" style="margin-left: 10px; text-decoration: none; color: #4f46e5;">Reset</a>
         </form>
     </div>
 
@@ -53,13 +33,15 @@
                     <td>{{ $member['email'] }}</td>
                     <td>{{ ucfirst($member['status']) }}</td>
                     <td>
-                        <a href="{{ route('members.show', $member['id']) }}" class="btn btn-info">Detail</a>
-                        <a href="{{ route('members.edit', $member['id']) }}" class="btn btn-edit">Edit</a>
-                        <form action="{{ route('members.destroy', $member['id']) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-danger" onclick="return confirm('Hapus anggota ini?')">Hapus</button>
-                        </form>
+                        <div style="display: flex; gap: 5px;">
+                            <a href="{{ route('members.show', $member['id']) }}" class="btn" style="background: #0ea5e9;">Detail</a>
+                            <a href="{{ route('members.edit', $member['id']) }}" class="btn" style="background: #eab308;">Edit</a>
+                            <form action="{{ route('members.destroy', $member['id']) }}" method="POST" style="margin: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn" style="background: #dc2626;" onclick="return confirm('Hapus anggota ini?')">Hapus</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @empty
@@ -73,5 +55,4 @@
     <div style="margin-top: 20px;">
         {{ $members->appends(request()->query())->links() }}
     </div>
-</body>
-</html>
+@endsection

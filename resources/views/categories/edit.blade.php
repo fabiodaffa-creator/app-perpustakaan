@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Kategori</title>
-    <style>
-        body { font-family: sans-serif; margin: 40px; max-width: 500px; }
-        label { display: block; margin-top: 12px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }
-        .error { color: #b91c1c; font-size: 14px; margin-top: 4px; }
-        .btn { margin-top: 20px; padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <h1>Edit Kategori</h1>
-    <p><a href="{{ route('categories.index') }}">&larr; Kembali ke daftar kategori</a></p>
+@extends('layouts.app')
 
-    <form action="{{ route('categories.update', $category['id']) }}" method="POST">
-        @csrf
-        @method('PUT')
+@section('title', 'Edit Kategori')
 
-        <label for="nama_kategori">Nama Kategori</label>
-        <input type="text" name="nama_kategori" id="nama_kategori" value="{{ old('nama_kategori', $category['nama_kategori']) }}">
-        @error('nama_kategori')
-            <div class="error">{{ $message }}</div>
-        @enderror
+@section('content')
+    <div style="max-width: 500px;">
+        <h1>Edit Kategori</h1>
+        <p><a href="{{ route('categories.index') }}">&larr; Kembali ke daftar kategori</a></p>
 
-        <label for="deskripsi">Deskripsi (opsional)</label>
-        <textarea name="deskripsi" id="deskripsi" rows="4">{{ old('deskripsi', $category['deskripsi']) }}</textarea>
-        @error('deskripsi')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <form action="{{ route('categories.update', $category['id']) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <button type="submit" class="btn">Perbarui</button>
-    </form>
-</body>
-</html>
+            <label for="nama_kategori" style="display: block; margin-top: 12px; font-weight: bold;">Nama Kategori</label>
+            <input type="text" name="nama_kategori" id="nama_kategori" value="{{ old('nama_kategori', $category['nama_kategori']) }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
+            @error('nama_kategori')
+                <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
+
+            <label for="deskripsi" style="display: block; margin-top: 12px; font-weight: bold;">Deskripsi (opsional)</label>
+            <textarea name="deskripsi" id="deskripsi" rows="4" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">{{ old('deskripsi', $category['deskripsi']) }}</textarea>
+            @error('deskripsi')
+                <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
+
+            <button type="submit" class="btn" style="margin-top: 20px;">Perbarui</button>
+        </form>
+    </div>
+@endsection
