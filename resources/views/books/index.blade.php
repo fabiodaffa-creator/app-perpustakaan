@@ -13,7 +13,7 @@
                 <th>ID</th>
                 <th>Judul</th>
                 <th>Penulis</th>
-                <th>ID Kategori</th>
+                <th>Kategori</th>
                 <th>Stok</th>
                 <th>Aksi</th>
             </tr>
@@ -24,7 +24,7 @@
                     <td>{{ $book['id'] }}</td>
                     <td>{{ $book['judul'] }}</td>
                     <td>{{ $book['penulis'] }}</td>
-                    <td>{{ $book['category_id'] }}</td>
+                    <td>{{ $book['category']['nama_kategori'] }}</td>
                     <td>{{ $book['stok'] }}</td>
                     <td>
                         <div style="display: flex; gap: 5px;">
@@ -49,6 +49,4 @@
     <div class="mt-4">
         {{ $books->links() }}
     </div>
-
-    <p><em>Catatan: kolom kategori masih menampilkan ID. Menampilkan nama kategori memerlukan Eloquent Relationship, dipelajari di Pertemuan 7.</em></p>
 @endsection

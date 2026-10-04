@@ -10,7 +10,7 @@
         <form action="{{ route('members.update', $member['id']) }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <label style="display: block; margin-top: 12px; font-weight: bold;">Nama</label>
             <input type="text" name="nama" value="{{ old('nama', $member['nama']) }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
             @error('nama') <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div> @enderror
