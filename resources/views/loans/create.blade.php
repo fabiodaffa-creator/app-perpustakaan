@@ -23,20 +23,7 @@
                 <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
             @enderror
 
-            <label for="user_id" style="display: block; margin-top: 12px; font-weight: bold;">Petugas</label>
-            <select name="user_id" id="user_id" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
-                <option value="">-- Pilih Petugas --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user['id'] }}" @selected(old('user_id') == $user['id'])>
-                        {{ $user['name'] }}
-                    </option>
-                @endforeach
-            </select>
-            @error('user_id')
-                <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
-            @enderror
-            <p><em>Catatan: dropdown petugas dipilih manual karena login belum ada - otomatis dari user yang login mulai Pertemuan 8.</em></p>
-
+           <p><em>Petugas pencatat: {{ auth()->user()->name }} (otomatis dari akun yang login).</em></p>
             <label for="tanggal_pinjam" style="display: block; margin-top: 12px; font-weight: bold;">Tanggal Pinjam</label>
             <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" value="{{ old('tanggal_pinjam') }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
             @error('tanggal_pinjam')
